@@ -77,7 +77,7 @@ int main(int argc, const char *argv[])
             /*x[3] = '\0';*/
             /*printf("\r%s", x);*/
         /*}*/
-        printf("The value of pi is %.100llf \n", pi_number);
+        printf("The value of pi is %.50llf \n", pi_number);
     }
     return 0;
 }
