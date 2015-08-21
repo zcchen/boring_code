@@ -30,20 +30,25 @@ class double_cycl_list():
         current_node = self.head
         _del_flag = False
         size = self.size()
-        for i in range(size):
-            tmp = None
+        if size == 1:
             if current_node.data == node_value:
-                current_node.prev.next = current_node.next
-                current_node.next.prev = current_node.prev
-                if current_node is self.head:
-                    self.head = current_node.next
-                if current_node is self.tail:
-                    self.tail = current_node.prev
-                _del_flag = True
-                tmp = current_node
-            current_node = current_node.next
-            if _del_flag == True:
-                del(tmp)
+                self.head = self.tail = None
+                del(current_node)
+        else:
+            for i in range(size):
+                tmp = None
+                if current_node.data == node_value:
+                    current_node.prev.next = current_node.next
+                    current_node.next.prev = current_node.prev
+                    if current_node is self.head:
+                        self.head = current_node.next
+                    if current_node is self.tail:
+                        self.tail = current_node.prev
+                    _del_flag = True
+                    tmp = current_node
+                current_node = current_node.next
+                if _del_flag == True:
+                    del(tmp)
 
     def size(self):
         current_node = self.head
@@ -94,4 +99,7 @@ if __name__ == '__main__':
     s.show()
 
     s.remove(36)
+    s.show()
+
+    s.remove(26)
     s.show()
