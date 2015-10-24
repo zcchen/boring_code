@@ -26,16 +26,17 @@ def main(xml_file_in, xml_file_out):
     _count = root.get('count')
     print("Old SMS coun: {}".format(_count))
 
-    key_dict = []
+    key_dict = {}
 
     for i in root.findall('./'):
         hash_key = i.get('date') + '_' + \
                 hashlib.sha224(i.get('body').encode()).hexdigest()
                 #hashlib.md5(i.get('body').encode()).hexdigest()
-        if hash_key not in key_dict:
-            key_dict.append(hash_key)
-        else:
-            root.remove(i)
+        try:
+            if key_dict[hash_key] == True:
+                root.remove(i)
+        except KeyError:
+            key_dict[hash_key] = True
     new_count = str(len(key_dict))
     root.set('count', new_count)
 
